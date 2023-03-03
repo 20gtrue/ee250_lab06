@@ -118,6 +118,8 @@ while True:
           setText_norefresh("%3dcm          \n%3dcm")
         
 	       
-    else:
-	setText_norefresh("no luck")    
+    except Exception as e:
+    	print ("Error:{}".format(e))
+
+    time.sleep(0.1) # don't overload the i2c bus 
 
