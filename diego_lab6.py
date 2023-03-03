@@ -108,7 +108,7 @@ while True:
             r, g, b = 0, 255, 0
 
         # Set the backlight color of the LCD based on the threshold status
-        grovepi.setRGB(r, g, b)
+        setRGB(r, g, b)
 
         # Display the threshold distance on the top line of the LCD
         top_line_text = "Threshold: {}cm".format(threshold_distance)
