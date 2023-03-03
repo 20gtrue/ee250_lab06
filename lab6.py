@@ -113,9 +113,9 @@ while True:
         setRGB(0,128,64)
         
         if(act_dist <= thresh_dist):
-          setText_norefresh("%3dcm OBJ PRES \n%3dcm" %(act_dist, thresh_dist))
+          setText_norefresh("%3dcm OBJ PRES \n%3dcm" %(thresh_dist, act_dist))
         else:
-          setText_norefresh("%3dcm          \n%3dcm" %(act_dist, thresh_dist))
+          setText_norefresh("%3dcm          \n%3dcm" %(thresh_dist, act_dist))
         
 	       
     except Exception as e:
