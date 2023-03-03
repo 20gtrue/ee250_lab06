@@ -112,10 +112,12 @@ while True:
         setText_norefresh("%3dcm" %(act_dist))
         setText_norefresh("\n%3dcm" %(thresh_dist))
         
-        if(act_dist <= thresh_dist)
+        if(act_dist <= thresh_dist):
           setText_norefresh("%3dcm OBJ PRES \n%3dcm")
-        else
+        else:
           setText_norefresh("%3dcm          \n%3dcm")
         
-       
-        
+	       
+    else:
+	setText_norefresh("no luck")    
+
