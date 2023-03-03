@@ -31,6 +31,58 @@ full_angle = 300
 
 grovepi.pinMode(potentiometer,"INPUT")
 
+def setRGB(r,g,b):
+    bus.write_byte_data(DISPLAY_RGB_ADDR,0,0)
+    bus.write_byte_data(DISPLAY_RGB_ADDR,1,0)
+    bus.write_byte_data(DISPLAY_RGB_ADDR,0x08,0xaa)
+    bus.write_byte_data(DISPLAY_RGB_ADDR,4,r)
+    bus.write_byte_data(DISPLAY_RGB_ADDR,3,g)
+    bus.write_byte_data(DISPLAY_RGB_ADDR,2,b)
+    
+    
+def setText(text):
+    textCommand(0x01) # clear display
+    time.sleep(.05)
+    textCommand(0x08 | 0x04) # display on, no cursor
+    textCommand(0x28) # 2 lines
+    time.sleep(.05)
+    count = 0
+    row = 0
+    for c in text:
+        if c == '\n' or count == 16:
+            count = 0
+            row += 1
+            if row == 2:
+                break
+            textCommand(0xc0)
+            if c == '\n':
+                continue
+        count += 1
+        bus.write_byte_data(DISPLAY_TEXT_ADDR,0x40,ord(c))
+        
+def setText_norefresh(text):
+    textCommand(0x02) # return home
+    time.sleep(.05)
+    textCommand(0x08 | 0x04) # display on, no cursor
+    textCommand(0x28) # 2 lines
+    time.sleep(.05)
+    count = 0
+    row = 0
+    while len(text) < 32: #clears the rest of the screen
+        text += ' '
+    for c in text:
+        if c == '\n' or count == 16:
+            count = 0
+            row += 1
+            if row == 2:
+                break
+            textCommand(0xc0)
+            if c == '\n':
+                continue
+        count += 1
+        bus.write_byte_data(DISPLAY_TEXT_ADDR,0x40,ord(c))
+
+
 while True:
     try:
         # Read sensor value from potentiometer
@@ -77,6 +129,7 @@ while True:
         # Display the current distance on the bottom line of the LCD
         bottom_line_text = "Distance: {}cm".format(distance)
         setText_norefresh(bottom_line_text)
+    
     except Exception as e:
     	print ("Error:{}".format(e))
 
