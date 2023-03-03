@@ -1,36 +1,6 @@
 import grovepi
 import time
 
-# set I2C to use the hardware bus
-grovepi.set_bus("RPI_1")
-
-# Connect the Grove Ultrasonic Ranger to digital port D4
-# SIG,NC,VCC,GND
-ultrasonic_ranger = 4
-
-# Connect the Grove Rotary Angle Sensor to analog port A0
-# SIG,NC,VCC,GND
-potentiometer = 0
-
-#Connect the Grove LCD RGB Backlight
-#This device has two I2C addresses
-DISPLAY_RGB_ADDR = 0x62
-DISPLAY_TEXT_ADDR = 0x3e
-
-# Set initial threshold distance to 20cm
-threshold_distance = 20
-
-# Reference voltage of ADC is 5v
-adc_ref = 5
-
-# Vcc of the grove interface is normally 5v
-grove_vcc = 5
-
-# Full value of the rotary angle is 300 degrees, as per it's specs (0 to 300)
-full_angle = 300
-
-grovepi.pinMode(potentiometer,"INPUT")
-
 def setRGB(r,g,b):
     bus.write_byte_data(DISPLAY_RGB_ADDR,0,0)
     bus.write_byte_data(DISPLAY_RGB_ADDR,1,0)
@@ -82,6 +52,35 @@ def setText_norefresh(text):
         count += 1
         bus.write_byte_data(DISPLAY_TEXT_ADDR,0x40,ord(c))
 
+# set I2C to use the hardware bus
+grovepi.set_bus("RPI_1")
+
+# Connect the Grove Ultrasonic Ranger to digital port D4
+# SIG,NC,VCC,GND
+ultrasonic_ranger = 4
+
+# Connect the Grove Rotary Angle Sensor to analog port A0
+# SIG,NC,VCC,GND
+potentiometer = 0
+
+#Connect the Grove LCD RGB Backlight
+#This device has two I2C addresses
+DISPLAY_RGB_ADDR = 0x62
+DISPLAY_TEXT_ADDR = 0x3e
+
+# Set initial threshold distance to 20cm
+threshold_distance = 20
+
+# Reference voltage of ADC is 5v
+adc_ref = 5
+
+# Vcc of the grove interface is normally 5v
+grove_vcc = 5
+
+# Full value of the rotary angle is 300 degrees, as per it's specs (0 to 300)
+full_angle = 300
+
+grovepi.pinMode(potentiometer,"INPUT")
 
 while True:
     try:
