@@ -83,7 +83,7 @@ ultrasonic_ranger = 4
 # SIG,NC,VCC,GND
 potentiometer = 0
 grovepi.pinMode(potentiometer,"INPUT")
-grovepi.pinMode(led,"OUTPUT")
+grovepi.pinMode(ultrasonic_ranger,"OUTPUT")
 time.sleep(1)
 # Reference voltage of ADC is 5v
 adc_ref = 5
@@ -109,13 +109,11 @@ while True:
         act_dist = int(grovepi.ultrasonicRead(ultrasonic_ranger))
         
         setRGB(0,128,64)
-        setText_norefresh("%3dcm" %(act_dist))
-        setText_norefresh("\n%3dcm" %(thresh_dist))
         
         if(act_dist <= thresh_dist):
-          setText_norefresh("%3dcm OBJ PRES \n%3dcm")
+          setText_norefresh("%3dcm OBJ PRES \n%3dcm" %(act_dist, thresh_dist))
         else:
-          setText_norefresh("%3dcm          \n%3dcm")
+          setText_norefresh("%3dcm          \n%3dcm" %(act_dist, thresh_dist))
         
 	       
     except Exception as e:
