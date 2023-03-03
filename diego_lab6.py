@@ -1,3 +1,5 @@
+# THIS IS NOT OUR CODE (SEE LAB6.py); I ran a friends code because his rpi was having issues connecting so we ran it on my device :)
+
 import grovepi
 import time
 
