@@ -132,4 +132,4 @@ while True:
     except Exception as e:
     	print ("Error:{}".format(e))
 
-    time.sleep(0.1) # don't overload the i2c bus
+    time.sleep(0.1)
